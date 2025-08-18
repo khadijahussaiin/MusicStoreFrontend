@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Albums</title>
+    <link rel="stylesheet" href="css/albums.css">
+</head>
+<body>
+<h1>Albums</h1>
+<button id="addAlbumBtn">➕ Add Album</button>
+
+<!-- Pop-up til nyt album -->
+<div id="albumModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add/Edit Album</h2>
+        <form id="albumForm">
+            <input type="hidden" id="albumId">
+            <label>Title: <input type="text" id="title" required></label><br>
+            <label>Genre: <input type="text" id="genre" required></label><br>
+            <label>Artist: <input type="text" id="artist" required></label><br>
+            <label>Available:
+                <select id="available">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </label><br>
+            <label>Store:
+                <select id="storeSelect"></select>
+            </label><br>
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</div>
+
+<table id="albumTable">
+    <thead>
+    <tr>
+        <th>Title</th><th>Genre</th><th>Artist</th>
+        <th>Available</th><th>Store</th><th>Actions</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script src="js/albums.js"></script>
+</body>
+</html>
