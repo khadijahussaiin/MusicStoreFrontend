@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Store System</title>
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-$END$
+<div class="container">
+  <header>
+    <h1>🎵 Music Store System</h1>
+    <p>Administrer albums, butikker og kunder</p>
+  </header>
+
+  <main>
+    <div class="menu-container">
+      <div class="menu-card" onclick="navigateToPage('albumsAndStore.html')">
+        <div class="icon">🎼</div>
+        <h2>Albums & Store</h2>
+        <p>Administrer albums og se butiksinformationer</p>
+        <button class="nav-btn">Gå til Albums</button>
+      </div>
+
+      <div class="menu-card" onclick="navigateToPage('customers.html')">
+        <div class="icon">👥</div>
+        <h2>Customers</h2>
+        <p>Håndter kunder og deres reservationer</p>
+        <button class="nav-btn">Gå til Kunder</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Music Store System</p>
+  </footer>
+</div>
+
+<script>
+  function navigateToPage(page) {
+    window.location.href = page;
+  }
+</script>
 </body>
 </html>

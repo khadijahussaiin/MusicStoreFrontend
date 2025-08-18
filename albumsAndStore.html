@@ -1,48 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Albums</title>
-    <link rel="stylesheet" href="css/albums.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums & Store Management</title>
+    <link rel="stylesheet" href="css/albumsAndStore.css">
 </head>
 <body>
-<h1>Albums</h1>
-<button id="addAlbumBtn">➕ Add Album</button>
+<div class="container">
+    <header>
+        <h1>🎼 Albums & Store Management</h1>
+        <nav>
+            <button onclick="window.location.href='index.html'" class="nav-btn">← Tilbage til forsiden</button>
+            <button onclick="window.location.href='customers.html'" class="nav-btn">Gå til Kunder</button>
+        </nav>
+    </header>
 
-<!-- Pop-up til nyt album -->
-<div id="albumModal" class="modal">
+    <main>
+        <!-- Add Album Button -->
+        <section class="add-section">
+            <button id="addAlbumBtn" class="add-btn">+ Tilføj Nyt Album</button>
+        </section>
+
+        <!-- Albums Table -->
+        <section class="albums-section">
+            <h2>📀 Album Oversigt</h2>
+            <div class="table-container">
+                <table id="albumsTable">
+                    <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th>Genre</th>
+                        <th>Artist</th>
+                        <th>På Lager</th>
+                        <th>Butik</th>
+                        <th>Handlinger</th>
+                    </tr>
+                    </thead>
+                    <tbody id="albumsTableBody">
+                    <!-- Albums will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Store Details Section -->
+        <section class="store-section">
+            <h2>🏪 Butiks Detaljer</h2>
+            <div id="storeDetails" class="store-details">
+                <p>Klik på en butiks navn i tabellen for at se detaljer</p>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Add Album Modal -->
+<div id="addAlbumModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Add/Edit Album</h2>
-        <form id="albumForm">
-            <input type="hidden" id="albumId">
-            <label>Title: <input type="text" id="title" required></label><br>
-            <label>Genre: <input type="text" id="genre" required></label><br>
-            <label>Artist: <input type="text" id="artist" required></label><br>
-            <label>Available:
-                <select id="available">
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+        <h2>Tilføj Nyt Album</h2>
+        <form id="addAlbumForm">
+            <div class="form-group">
+                <label for="title">Titel:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" required>
+            </div>
+            <div class="form-group">
+                <label for="artist">Artist:</label>
+                <input type="text" id="artist" name="artist" required>
+            </div>
+            <div class="form-group">
+                <label for="available">På Lager:</label>
+                <select id="available" name="available" required>
+                    <option value="true">Ja</option>
+                    <option value="false">Nej</option>
                 </select>
-            </label><br>
-            <label>Store:
-                <select id="storeSelect"></select>
-            </label><br>
-            <button type="submit">Save</button>
+            </div>
+            <div class="form-group">
+                <label for="storeSelect">Butik:</label>
+                <select id="storeSelect" name="storeSelect" required>
+                    <!-- Stores will be loaded here -->
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Tilføj Album</button>
+                <button type="button" class="cancel-btn" onclick="closeModal('addAlbumModal')">Annuller</button>
+            </div>
         </form>
     </div>
 </div>
 
-<table id="albumTable">
-    <thead>
-    <tr>
-        <th>Title</th><th>Genre</th><th>Artist</th>
-        <th>Available</th><th>Store</th><th>Actions</th>
-    </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+<!-- Edit Album Modal -->
+<div id="editAlbumModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Rediger Album</h2>
+        <form id="editAlbumForm">
+            <input type="hidden" id="editAlbumId" name="editAlbumId">
+            <div class="form-group">
+                <label for="editTitle">Titel:</label>
+                <input type="text" id="editTitle" name="editTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="editGenre">Genre:</label>
+                <input type="text" id="editGenre" name="editGenre" required>
+            </div>
+            <div class="form-group">
+                <label for="editArtist">Artist:</label>
+                <input type="text" id="editArtist" name="editArtist" required>
+            </div>
+            <div class="form-group">
+                <label for="editAvailable">På Lager:</label>
+                <select id="editAvailable" name="editAvailable" required>
+                    <option value="true">Ja</option>
+                    <option value="false">Nej</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editStoreSelect">Butik:</label>
+                <select id="editStoreSelect" name="editStoreSelect" required>
+                    <!-- Stores will be loaded here -->
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Gem Ændringer</button>
+                <button type="button" class="cancel-btn" onclick="closeModal('editAlbumModal')">Annuller</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-<script src="js/albums.js"></script>
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content small">
+        <h2>⚠️ Bekræft Sletning</h2>
+        <p>Er du sikker på, at du vil slette dette album?</p>
+        <p><strong>Dette vil også fjerne albummet fra alle kunders reservationer!</strong></p>
+        <div class="form-actions">
+            <button id="confirmDeleteBtn" class="delete-btn">Ja, Slet</button>
+            <button class="cancel-btn" onclick="closeModal('deleteModal')">Annuller</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/albumsAndStore.js"></script>
 </body>
 </html>
