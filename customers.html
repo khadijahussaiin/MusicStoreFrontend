@@ -2,110 +2,40 @@
 <html lang="da">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Management</title>
     <link rel="stylesheet" href="css/customers.css">
 </head>
 <body>
 <div class="container">
-    <header>
-        <h1>👥 Customer Management</h1>
-        <nav>
-            <button onclick="window.location.href='albumsAndStore.html'" class="nav-btn">Gå til Albums & Store</button>
-        </nav>
-    </header>
+    <h1>👥 Customer Management</h1>
 
-    <main>
-        <!-- Customer List Section -->
-        <section class="customers-section">
-            <h2>📋 Kunde Oversigt</h2>
-            <div class="customers-container">
-                <div class="customers-list">
-                    <h3>Kunder</h3>
-                    <div id="customersList" class="customer-items">
-                        <!-- Customers will be loaded here -->
-                    </div>
-                </div>
+    <button class="nav-btn" onclick="location.href='albumsAndStore.html'">Gå til Albums</button>
 
-                <div class="customer-details">
-                    <div id="customerDetailsContent">
-                        <p class="placeholder-text">👈 Vælg en kunde til venstre for at se detaljer</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Selected Customer Info -->
-        <section id="selectedCustomerSection" class="selected-customer-section" style="display: none;">
-            <div class="customer-header">
-                <h2 id="selectedCustomerName">Kunde Information</h2>
-            </div>
-
-            <!-- Add/Remove Reservations -->
-            <div class="reservation-actions">
-                <div class="search-albums">
-                    <h3>🔍 Søg og Reserver Albums</h3>
-                    <div class="search-container">
-                        <input type="text" id="albumSearch" placeholder="Søg efter album titel, artist eller genre...">
-                        <button id="searchBtn" class="search-btn">Søg</button>
-                    </div>
-                    <div id="searchResults" class="search-results">
-                        <!-- Search results will appear here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Current Reservations -->
-            <div class="reservations-container">
-                <div class="current-reservations">
-                    <h3>📚 Aktuelle Reservationer</h3>
-                    <div id="currentReservations">
-                        <!-- Current reservations will be loaded here -->
-                    </div>
-                </div>
-
-                <!-- Available Reservations (collapsible) -->
-                <div class="available-reservations">
-                    <h3 onclick="toggleAvailableReservations()" class="collapsible-header">
-                        ✅ Tilgængelige Reservationer
-                        <span id="availableToggle" class="toggle-icon">▼</span>
-                    </h3>
-                    <div id="availableReservationsList" class="collapsible-content">
-                        <!-- Available reservations will be loaded here -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-</div>
-
-<!-- Reserve Album Confirmation Modal -->
-<div id="reserveModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Bekræft Reservation</h2>
-        <div id="reserveModalContent">
-            <!-- Album details will be shown here -->
+    <div class="grid">
+        <div>
+            <h3>Kunder</h3>
+            <div id="customersList"></div>
         </div>
-        <div class="form-actions">
-            <button id="confirmReserveBtn" class="submit-btn">Bekræft Reservation</button>
-            <button class="cancel-btn" onclick="closeModal('reserveModal')">Annuller</button>
+        <div id="customerDetails">
+            <p>👈 Vælg en kunde</p>
         </div>
     </div>
-</div>
 
-<!-- Cancel Reservation Confirmation Modal -->
-<div id="cancelModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>⚠️ Bekræft Afmelding</h2>
-        <div id="cancelModalContent">
-            <!-- Album details will be shown here -->
+    <div id="customerActions">
+        <h2 id="customerName"></h2>
+
+        <h3>🔍 Søg Albums</h3>
+        <input type="text" id="search" placeholder="Søg efter titel, genre, artist...">
+        <button class="search-btn" onclick="searchAlbums()">Søg</button>
+        <div id="searchResults"></div>
+
+        <h3>📚 Reservationer</h3>
+        <div id="reservations"></div>
+
+        <div class="collapsible" onclick="toggleAvailable()">
+            <strong>✅ Tilgængelige (klik for at åbne/lukke)</strong>
         </div>
-        <div class="form-actions">
-            <button id="confirmCancelBtn" class="delete-btn">Bekræft Afmelding</button>
-            <button class="cancel-btn" onclick="closeModal('cancelModal')">Annuller</button>
-        </div>
+        <div id="available" class="content"></div>
     </div>
 </div>
 
